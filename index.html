@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MCA Career Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<script>(function(){var t="dark";try{t=localStorage.getItem("mca-theme")||"dark"}catch(e){}document.documentElement.setAttribute("data-theme",t)})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout concept: a map of paths. One trunk (MCA year 1 foundations) branches into career paths; the reader explores each branch, compares them, finds their fit, then follows a 2-year plan. */
+:root{
+  --bg:#F6F5F1; --panel:#FFFFFF; --ink:#17181C; --muted:#5E6068; --rule:#DDDBD3; --soft:#ECEAE3;
+  --hi:#E8B021; --trunk:#17181C;
+  --p1:#0A9CC0; --p2:#D9522C; --p3:#1F8A5B; --p4:#8A4FD6; --p5:#D98A1E; --p6:#2563EB; --p7:#C2335B; --p8:#4F7F10; --p9:#2E8B8B;
+  --display:"Syne","Trebuchet MS","Segoe UI",system-ui,sans-serif;
+  --body:"Manrope","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1014; --panel:#17181F; --ink:#EEEDE8; --muted:#A3A4AE; --rule:#2A2B35; --soft:#1F2029;
+  --hi:#F5C342; --trunk:#EEEDE8;
+  --p1:#3FC3E3; --p2:#FF7A55; --p3:#3DC98A; --p4:#B48CFF; --p5:#F5A54A; --p6:#6C9CFF; --p7:#F0628A; --p8:#9CD14A; --p9:#4FC0C0;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1014; --panel:#17181F; --ink:#EEEDE8; --muted:#A3A4AE; --rule:#2A2B35; --soft:#1F2029;
+  --hi:#F5C342; --trunk:#EEEDE8;
+  --p1:#3FC3E3; --p2:#FF7A55; --p3:#3DC98A; --p4:#B48CFF; --p5:#F5A54A; --p6:#6C9CFF; --p7:#F0628A; --p8:#9CD14A; --p9:#4FC0C0;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+[hidden]{display:none!important}
+img{max-width:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.08;letter-spacing:-.01em}
+h1{font-size:clamp(38px,6vw,72px);font-weight:800}
+h2{font-size:clamp(28px,3.8vw,44px);font-weight:800}
+h3{font-size:20px;font-weight:700}
+p{margin:0}
+a{color:var(--p1)}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lede{max-width:62ch;color:var(--muted);font-size:18px}
+section{padding-block:80px;border-top:1px solid var(--rule)}
+.sec-head{display:grid;gap:14px;margin-bottom:40px}
+:focus-visible{outline:3px solid var(--hi);outline-offset:2px;border-radius:6px}
+.hl{background:linear-gradient(transparent 60%,color-mix(in srgb,var(--hi) 55%,transparent) 60%);padding:0 .06em}
+.chip{font-family:var(--mono);font-size:12.5px;padding:4px 10px;border-radius:8px;background:var(--soft)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.btn{font:inherit;font-size:14px;font-weight:700;padding:9px 16px;border-radius:99px;border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink)}
+
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+nav.top .wrap{display:flex;align-items:center;gap:18px;height:58px;overflow-x:auto;scrollbar-width:none}
+.logo{font-family:var(--display);font-weight:800;font-size:17px;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.logo i{width:22px;height:22px;border-radius:50%;background:conic-gradient(var(--p1),var(--p2),var(--p3),var(--p4),var(--p5),var(--p1))}
+nav.top .links{display:flex;gap:4px;margin-left:auto}
+nav.top a.l{color:var(--muted);text-decoration:none;font-size:14px;padding:6px 10px;border-radius:99px;white-space:nowrap}
+nav.top a.l:hover{background:var(--soft);color:var(--ink)}
+.themebtn{flex:none;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--rule);background:var(--panel);color:var(--ink);cursor:pointer;display:grid;place-items:center;margin-left:6px}
+.themebtn svg{width:18px;height:18px}
+.themebtn .sun{display:none}
+:root[data-theme="dark"] .themebtn .sun{display:block}
+:root[data-theme="dark"] .themebtn .moon{display:none}
+
+/* hero */
+.hero{border-top:none;padding-block:56px 64px}
+.hero-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center}
+.hero-grid > *{min-width:0}
+.hero .lede{margin-top:20px}
+.stats{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:28px}
+.stat b{display:block;font-family:var(--display);font-size:34px;font-weight:800;line-height:1}
+.stat span{font-size:14px;color:var(--muted)}
+.tree{background:var(--panel);border:1px solid var(--rule);border-radius:20px;padding:16px}
+.tree svg{display:block;width:100%;height:auto}
+.tree text{font-family:var(--body);fill:var(--ink)}
+.tr-root{fill:var(--trunk)}
+.tr-rt{font-family:var(--display)!important;font-weight:800;font-size:15px;fill:var(--bg)!important}
+.tr-line{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420;animation:draw 1.4s cubic-bezier(.3,.6,.2,1) forwards;animation-delay:calc(.35s + var(--i) * .12s)}
+@keyframes draw{to{stroke-dashoffset:0}}
+.tr-node{transform-box:fill-box;transform-origin:center;animation:popin .5s cubic-bezier(.2,.9,.3,1.3) both;animation-delay:calc(1.1s + var(--i) * .12s)}
+@keyframes popin{from{transform:scale(0)}to{transform:scale(1)}}
+.tr-lbl{font-size:13px;font-weight:700}
+.tr-sub{font-family:var(--mono)!important;font-size:10.5px;fill:var(--muted)!important}
+.tr-base{fill:var(--soft);stroke:var(--rule)}
+.tr-bt{font-family:var(--mono)!important;font-size:11px;font-weight:600;fill:var(--muted)!important;letter-spacing:.08em}
+.tree-cap{font-size:14px;color:var(--muted);text-align:center;margin-top:10px}
+
+/* foundation */
+.found{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.fcard{background:var(--panel);border:1px solid var(--rule);border-radius:16px;padding:20px;display:grid;gap:8px;align-content:start;position:relative;overflow:hidden}
+.fcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--hi)}
+.fcard b{font-family:var(--display);font-size:16px}
+.fcard p{font-size:15px;color:var(--muted)}
+.fcard .why{font-size:13.5px;border-top:1px dashed var(--rule);padding-top:8px}
+.fnote{margin-top:18px;background:color-mix(in srgb,var(--hi) 12%,var(--panel));border:1px solid color-mix(in srgb,var(--hi) 40%,var(--rule));border-radius:14px;padding:16px 18px;font-size:15.5px}
+
+/* paths */
+.ptabs{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;margin-bottom:16px}
+.ptab{font:inherit;color:var(--ink);background:var(--panel);border:1.5px solid var(--rule);border-radius:14px;padding:12px 8px 10px;cursor:pointer;display:grid;justify-items:center;gap:6px;text-align:center;transition:transform .25s,border-color .25s,background .25s}
+.ptab .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 16%,var(--panel));color:var(--c);font-family:var(--mono);font-weight:600;font-size:12px;transition:transform .3s}
+.ptab:hover .ic{transform:translateY(-3px) rotate(-6deg)}
+.ptab b{font-family:var(--display);font-size:12.5px;line-height:1.15}
+.ptab[aria-selected="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,var(--panel));transform:translateY(-3px)}
+.ppanel{background:var(--panel);border:1px solid var(--rule);border-top:6px solid var(--c);border-radius:20px;padding:28px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:30px;animation:rise .4s ease}
+@keyframes rise{from{transform:translateY(10px)}to{transform:none}}
+.ppanel > div{display:grid;gap:18px;align-content:start;min-width:0}
+.ppanel h4{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:600}
+.ppanel .what{font-size:19px;line-height:1.55}
+.ppanel .ana{border-left:4px solid var(--c);padding:4px 0 4px 14px;font-size:15.5px;color:var(--muted)}
+.ppanel .ana b{color:var(--ink)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:6px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:baseline;font-size:15.5px;counter-increment:s}
+.steps li::before{content:counter(s);font-family:var(--mono);font-size:12px;font-weight:600;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:var(--panel);transform:translateY(4px)}
+.jobs{display:grid;gap:6px}
+.job{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--soft);border-radius:10px;padding:9px 12px;font-size:15px}
+.job span{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.fit{background:color-mix(in srgb,var(--c) 10%,var(--panel));border-radius:12px;padding:14px;font-size:15px}
+.fit b{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--c);margin-bottom:4px}
+.build{display:flex;flex-wrap:wrap;gap:6px}
+.build span{font-size:14px;padding:5px 10px;border-radius:99px;border:1px solid var(--rule)}
+
+/* compare */
+.cmp-scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:16px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:900px;font-size:14.5px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--soft);position:sticky;top:0}
+td:first-child{font-family:var(--display);font-weight:700;white-space:nowrap}
+td:first-child i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:8px;background:var(--c);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:color-mix(in srgb,var(--soft) 60%,transparent)}
+
+/* quiz */
+.quiz{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.qcard{background:var(--panel);border:1px solid var(--rule);border-radius:20px;padding:24px;display:grid;gap:18px}
+.q{display:grid;gap:8px}
+.q b{font-size:16px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts button{font:inherit;font-size:14px;padding:7px 12px;border-radius:99px;border:1.5px solid var(--rule);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.result{background:var(--panel);border:1px solid var(--rule);border-radius:20px;padding:24px;display:grid;gap:14px;position:sticky;top:76px}
+.rbar{display:grid;grid-template-columns:150px minmax(0,1fr) 36px;gap:10px;align-items:center;font-size:14px}
+.rbar .track{height:10px;border-radius:99px;background:var(--soft);overflow:hidden}
+.rbar .track i{display:block;height:100%;background:var(--c);border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.rbar em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right}
+.rtop{font-size:15.5px;color:var(--muted)}
+.rtop b{color:var(--ink)}
+
+/* hiring */
+.hire{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:24px;align-items:start}
+.funnel{background:var(--panel);border:1px solid var(--rule);border-radius:20px;padding:24px;display:grid;gap:8px}
+.frow{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center}
+.fstep{width:var(--w);max-width:100%;border-radius:12px;padding:12px 16px;background:color-mix(in srgb,var(--c) 16%,var(--panel));border:1.5px solid color-mix(in srgb,var(--c) 45%,var(--rule));display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;animation:lit 9s infinite;animation-delay:calc(var(--i) * 1.5s)}
+@keyframes lit{0%,12%{box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 30%,transparent);transform:scale(1.02)}18%,100%{box-shadow:none;transform:none}}
+.fstep b{font-family:var(--display);font-size:15px}
+.fstep span{display:block;font-size:13.5px;color:var(--muted)}
+.fstep em{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--c);white-space:nowrap}
+.ways{display:grid;gap:10px}
+.way{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:14px 16px;display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:start}
+.way .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--soft);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--muted)}
+.way b{font-family:var(--display);font-size:15px}
+.way span{display:block;font-size:14.5px;color:var(--muted)}
+
+/* plan */
+.plan{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.plan::before{content:"";position:absolute;left:4%;right:4%;top:26px;height:4px;border-radius:4px;background:var(--soft)}
+.plan::after{content:"";position:absolute;left:4%;top:26px;height:4px;border-radius:4px;width:92%;background:linear-gradient(90deg,var(--p2),var(--hi),var(--p3),var(--p1));transform-origin:left}
+@supports (animation-timeline: view()){.plan::after{animation:fillx linear both;animation-timeline:view();animation-range:entry 10% entry 90%}@keyframes fillx{from{transform:scaleX(.03)}to{transform:scaleX(1)}}}
+.sem{position:relative;z-index:1;display:grid;gap:10px;align-content:start}
+.sem .dot{width:56px;height:56px;border-radius:50%;background:var(--panel);border:3px solid var(--c);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:14px}
+.sem .card{background:var(--panel);border:1px solid var(--rule);border-radius:16px;padding:18px;display:grid;gap:10px;height:100%}
+.sem h3{font-size:17px}
+.sem ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:14.5px;color:var(--muted)}
+.sem .goal{font-size:13.5px;border-top:1px dashed var(--rule);padding-top:8px}
+.sem .goal b{color:var(--c)}
+
+/* checklist */
+.check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.check label{display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:14px 16px;cursor:pointer}
+.check input{width:20px;height:20px;accent-color:var(--p3);flex:none;margin-top:2px}
+.check label:has(input:checked){border-color:var(--p3);background:color-mix(in srgb,var(--p3) 8%,var(--panel))}
+.check .dt{font-weight:700}
+.check .dd{display:block;font-size:14px;color:var(--muted)}
+.progress{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.progress .bar{flex:1;height:10px;border-radius:99px;background:var(--soft);overflow:hidden}
+.progress .bar i{display:block;height:100%;background:var(--p3);transition:width .4s}
+.progress span{font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+/* myths & faq */
+.myths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.myth{background:var(--panel);border:1px solid var(--rule);border-radius:16px;padding:18px;display:grid;gap:8px}
+.myth .no{font-family:var(--mono);font-size:11.5px;color:var(--p2);font-weight:600;letter-spacing:.08em}
+.myth .yes{font-family:var(--mono);font-size:11.5px;color:var(--p3);font-weight:600;letter-spacing:.08em;margin-top:4px}
+.myth p{font-size:15px}
+.faq{display:grid;gap:10px;max-width:820px}
+.faq details{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:4px 18px}
+.faq summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";font-family:var(--mono);font-size:20px;line-height:1;color:var(--muted);transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding-bottom:16px;color:var(--muted)}
+
+footer{border-top:1px solid var(--rule);padding-block:44px 56px}
+.credit{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between}
+.credit .who{display:flex;gap:14px;align-items:center}
+.credit .av{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-family:var(--display);font-weight:800;color:var(--bg);background:var(--ink)}
+.credit .name{font-family:var(--display);font-weight:700;font-size:18px}
+.li{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:15px;padding:10px 18px;border-radius:99px;border:1.5px solid var(--ink);color:var(--ink)}
+.li:hover{background:var(--ink);color:var(--bg)}
+.li svg{width:18px;height:18px}
+
+@supports (animation-timeline: view()){.reveal{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 55%}}
+
+@media (max-width:980px){
+  .hero-grid,.quiz,.hire,.ppanel{grid-template-columns:minmax(0,1fr)}
+  .ptabs{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .found{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plan{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plan::before,.plan::after{display:none}
+  .myths{grid-template-columns:minmax(0,1fr)}
+  .result{position:static}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  section{padding-block:56px}
+  .found,.check,.plan{grid-template-columns:minmax(0,1fr)}
+  .ptabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .ppanel{padding:20px}
+  .rbar{grid-template-columns:110px minmax(0,1fr) 36px}
+  nav.top a.opt{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .tr-line{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Sections">
+  <div class="wrap">
+    <div class="logo"><i aria-hidden="true"></i>MCA Career Map</div>
+    <div class="links">
+      <a class="l" href="#foundation">Year 1 basics</a>
+      <a class="l" href="#paths">Career paths</a>
+      <a class="l opt" href="#fit">Find your fit</a>
+      <a class="l" href="#hiring">How hiring works</a>
+      <a class="l opt" href="#plan">2-year plan</a>
+    </div>
+    <button class="themebtn" type="button" id="themebtn" aria-label="Switch light or dark theme"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">For MCA first-year students</div>
+      <h1 style="margin-top:14px">Two years. <span class="hl">Many doors.</span> Here is the map.</h1>
+      <p class="lede">MCA opens the way to many tech jobs: web development, Java backend, data science, AI, mobile apps, cloud, security and more. This page shows every path in simple words, so you can choose early and use your two years well.</p>
+      <div class="stats">
+        <div class="stat"><b>9</b><span>career paths</span></div>
+        <div class="stat"><b>1</b><span>shared foundation</span></div>
+        <div class="stat"><b>4</b><span>semesters to plan</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="tree" role="img" aria-label="A tree: MCA Year 1 foundations at the bottom branches into nine career paths.">
+        <svg viewBox="0 0 640 400" id="tree"></svg>
+      </div>
+      <p class="tree-cap">Everyone starts on the same trunk. The branch you pick is up to you.</p>
+    </div>
+  </div>
+</header>
+
+<section id="foundation">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Step 1 · The trunk</div>
+      <h2>First, the basics every path needs</h2>
+      <p class="lede">Whatever you choose later, every interview and every job will test these. Build them in your first year and the rest becomes much easier.</p>
+    </div>
+    <div class="found">
+      <div class="fcard reveal"><b>One programming language, properly</b><p>Pick Java, Python or C++ and get really comfortable: loops, functions, objects, files.</p><span class="why">Why: every path builds on one language you know well.</span></div>
+      <div class="fcard reveal"><b>Data Structures & Algorithms</b><p>Arrays, strings, linked lists, stacks, trees, sorting, searching, recursion.</p><span class="why">Why: most coding tests and interviews are DSA questions.</span></div>
+      <div class="fcard reveal"><b>Databases & SQL</b><p>Tables, keys, joins, and writing queries to get the data you want.</p><span class="why">Why: every app stores data. SQL is asked in almost every interview.</span></div>
+      <div class="fcard reveal"><b>Git & GitHub</b><p>Save versions of your code, work with others, and show your projects online.</p><span class="why">Why: your GitHub profile is your portfolio.</span></div>
+      <div class="fcard reveal"><b>Computer basics</b><p>Operating systems, networks (how the internet works), and Linux commands.</p><span class="why">Why: common interview topics, and needed for cloud and security.</span></div>
+      <div class="fcard reveal"><b>Problem solving & aptitude</b><p>Logical reasoning, quantitative aptitude and verbal skills.</p><span class="why">Why: the first round of most campus placements.</span></div>
+      <div class="fcard reveal"><b>Communication</b><p>Explain your project in two minutes. Write a clear email. Ask good questions.</p><span class="why">Why: the interview and HR rounds, and daily teamwork.</span></div>
+      <div class="fcard reveal"><b>Build small things often</b><p>A calculator, a to-do app, a quiz game. Finish them and put them on GitHub.</p><span class="why">Why: finished projects beat certificates.</span></div>
+    </div>
+    <p class="fnote reveal"><b>One simple rule:</b> in year 1, spend most of your time on these basics and try two or three paths in small projects. By the end of year 1, pick one path to go deep in.</p>
+  </div>
+</section>
+
+<section id="paths">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Step 2 · The branches</div>
+      <h2>Nine career paths you can take</h2>
+      <p class="lede">Tap a path to see what the work is, what you learn, what you will build, and the job titles to search for.</p>
+    </div>
+    <div class="ptabs" role="tablist" aria-label="Career paths" id="ptabs"></div>
+    <div id="ppanel" role="tabpanel"></div>
+
+    <div class="sec-head reveal" style="margin:64px 0 20px">
+      <h3 style="font-size:26px">All nine, side by side</h3>
+      <p class="lede" style="font-size:16px">Scroll sideways on a phone.</p>
+    </div>
+    <div class="cmp-scroll reveal"><table id="cmp"></table></div>
+  </div>
+</section>
+
+<section id="fit">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Step 3 · Your fit</div>
+      <h2>Which path suits you?</h2>
+      <p class="lede">Answer five quick questions. This is just a starting point, not a final answer. Try things before you decide.</p>
+    </div>
+    <div class="quiz">
+      <div class="qcard" id="qcard"></div>
+      <div class="result" id="result"></div>
+    </div>
+  </div>
+</section>
+
+<section id="hiring">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Step 4 · Getting the job</div>
+      <h2>How hiring actually works</h2>
+      <p class="lede">Most companies follow the same rounds. Knowing them early means you can prepare for each one.</p>
+    </div>
+    <div class="hire">
+      <div class="funnel" aria-label="Hiring rounds">
+        <div class="frow"><div class="fstep" style="--w:100%;--c:var(--p6);--i:0"><div><b>Apply / shortlist</b><span>Resume, GitHub and LinkedIn are checked. Keep them clean and simple.</span></div><em>everyone</em></div></div>
+        <div class="frow"><div class="fstep" style="--w:88%;--c:var(--p1);--i:1"><div><b>Aptitude test</b><span>Logical reasoning, maths and English. Often online.</span></div><em>round 1</em></div></div>
+        <div class="frow"><div class="fstep" style="--w:76%;--c:var(--p3);--i:2"><div><b>Coding round</b><span>2 to 3 DSA problems in a set time. Practise on coding platforms.</span></div><em>round 2</em></div></div>
+        <div class="frow"><div class="fstep" style="--w:64%;--c:var(--p5);--i:3"><div><b>Technical interview</b><span>Your projects, your chosen path, SQL, OS, networks, and some live coding.</span></div><em>round 3</em></div></div>
+        <div class="frow"><div class="fstep" style="--w:52%;--c:var(--p4);--i:4"><div><b>HR interview</b><span>About you, your goals, teamwork and salary talk.</span></div><em>round 4</em></div></div>
+        <div class="frow"><div class="fstep" style="--w:40%;--c:var(--p2);--i:5"><div><b>Offer</b><span>Internship or full-time job.</span></div><em>🎉</em></div></div>
+      </div>
+      <div class="ways">
+        <div class="way reveal"><span class="ic">1</span><div><b>Campus placements</b><span>Companies come to your college, usually in the final year. Prepare from year 1.</span></div></div>
+        <div class="way reveal"><span class="ic">2</span><div><b>Internships</b><span>Do one in the summer after year 1. Many internships turn into job offers.</span></div></div>
+        <div class="way reveal"><span class="ic">3</span><div><b>Off-campus applications</b><span>LinkedIn, Naukri, company career pages, and referrals from seniors and alumni.</span></div></div>
+        <div class="way reveal"><span class="ic">4</span><div><b>Hackathons & open source</b><span>Build in public. Winning or contributing gets you noticed and gives you stories to tell.</span></div></div>
+        <div class="way reveal"><span class="ic">5</span><div><b>Government & PSU exams</b><span>Some roles in banks and public companies also hire MCA graduates through exams.</span></div></div>
+        <div class="way reveal"><span class="ic">6</span><div><b>Higher studies & research</b><span>M.Tech, PhD or research roles, especially for data science and AI.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Step 5 · The plan</div>
+      <h2>A simple two-year plan</h2>
+      <p class="lede">You do not need to do everything at once. One focus per semester is enough.</p>
+    </div>
+    <div class="plan">
+      <div class="sem reveal" style="--c:var(--p2)"><span class="dot">S1</span><div class="card"><h3>Semester 1 · Build the base</h3><ul><li>Get strong in one language</li><li>Start DSA: arrays, strings, recursion</li><li>Learn Git, make your GitHub account</li><li>Build 2 small projects</li></ul><div class="goal"><b>Goal:</b> you can write and share a working program.</div></div></div>
+      <div class="sem reveal" style="--c:var(--hi)"><span class="dot">S2</span><div class="card"><h3>Semester 2 · Explore paths</h3><ul><li>Continue DSA: trees, graphs, sorting</li><li>Learn SQL well</li><li>Try 2 or 3 paths with mini projects</li><li>Apply for a summer internship</li></ul><div class="goal"><b>Goal:</b> you know which path you enjoy most.</div></div></div>
+      <div class="sem reveal" style="--c:var(--p3)"><span class="dot">S3</span><div class="card"><h3>Semester 3 · Go deep</h3><ul><li>Pick one path and learn its full stack of tools</li><li>Build one big project and deploy it</li><li>Solve DSA problems daily</li><li>Polish your resume and LinkedIn</li></ul><div class="goal"><b>Goal:</b> one strong project you can demo in an interview.</div></div></div>
+      <div class="sem reveal" style="--c:var(--p1)"><span class="dot">S4</span><div class="card"><h3>Semester 4 · Get hired</h3><ul><li>Mock interviews with friends and seniors</li><li>Revise core subjects: DBMS, OS, networks</li><li>Apply on and off campus</li><li>Final-year project in your chosen path</li></ul><div class="goal"><b>Goal:</b> an offer letter in hand.</div></div></div>
+    </div>
+
+    <div class="sec-head reveal" style="margin:64px 0 0">
+      <h3 style="font-size:26px">Your placement-ready checklist</h3>
+      <p class="lede" style="font-size:16px">Tick items as you finish them. Your ticks are saved only in this browser.</p>
+    </div>
+    <div class="progress" style="margin-top:20px"><div class="bar"><i id="pbar" style="width:0%"></i></div><span id="ptext">0 of 8 done</span></div>
+    <div class="check" id="check"></div>
+  </div>
+</section>
+
+<section id="myths">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Good to know</div>
+      <h2>Three myths, cleared up</h2>
+    </div>
+    <div class="myths">
+      <div class="myth reveal"><span class="no">MYTH</span><p>"I need to learn every technology."</p><span class="yes">TRUTH</span><p style="color:var(--muted)">No. Companies hire for one path done well. Depth beats a long list of names on a resume.</p></div>
+      <div class="myth reveal"><span class="no">MYTH</span><p>"Certificates will get me the job."</p><span class="yes">TRUTH</span><p style="color:var(--muted)">Projects you can explain and a GitHub link matter far more than certificates.</p></div>
+      <div class="myth reveal"><span class="no">MYTH</span><p>"Placements start in the final year, so I can relax now."</p><span class="yes">TRUTH</span><p style="color:var(--muted)">The students who get the best offers started DSA and projects in year 1. Start small, start now.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Questions</div>
+      <h2>Common questions</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Which path has the most jobs?</summary><p>Web development (MERN, Java Spring Boot, Python) has the largest number of openings, especially for freshers. Data science, AI, cloud and security are growing fast but often expect a stronger base. Pick what you enjoy; you will work harder at it, and that shows.</p></details>
+      <details><summary>Should I learn Java or Python or JavaScript first?</summary><p>Any one is fine. Java is good for DSA and Spring Boot. Python is good for data science and quick scripts. JavaScript is needed for web. The language matters less than learning one deeply.</p></details>
+      <details><summary>Can I switch paths later?</summary><p>Yes. The basics are shared, so switching is common. Many developers move between web, cloud and data roles over a career.</p></details>
+      <details><summary>Do I need a high-end laptop or paid courses?</summary><p>No. A normal laptop and free resources are enough for every path on this page. Cloud free tiers cover deployment and databases.</p></details>
+      <details><summary>How many projects should I have?</summary><p>Three good ones: one small, one medium, and one big project that is deployed online with a README. Quality and your ability to explain them matter most.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap credit">
+    <div class="who"><span class="av" aria-hidden="true">SP</span><div class="name">Samarth Porwal</div></div>
+    <a class="li" href="https://www.linkedin.com/in/samarth-porwal-5564111b9/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 10v7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Connect on LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const tb=$('themebtn');
+tb.addEventListener('click',()=>{const r=document.documentElement,n=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('mca-theme',n)}catch(e){}});
+
+/* ---------- paths data ---------- */
+const P=[
+ {k:'MERN Full Stack',short:'MERN',ic:'JS',c:'--p1',
+  what:'Build complete websites and web apps: the screens people see (React) and the server and database behind them (Node.js, Express, MongoDB). All in JavaScript.',
+  ana:'<b>Like building a shop:</b> the front counter (React) and the back office and store room (Node, Express, MongoDB).',
+  learn:['HTML, CSS, JavaScript','React','Node.js & Express','MongoDB','REST APIs & login (JWT)','Git, deployment (Vercel, Render)'],
+  build:['Online store','Job portal','Chat app','Blog with login'],
+  jobs:[['Full Stack Developer','MERN'],['Frontend Developer','React'],['Backend Developer','Node.js'],['JavaScript Developer','']],
+  fit:'You like seeing results on screen quickly, and want to build complete apps on your own.',
+  lang:'JavaScript',tools:'React, Node, Express, MongoDB',likes:'Building visible products fast'},
+ {k:'Java + Spring Boot',short:'Spring Boot',ic:'☕',c:'--p2',
+  what:'Build the backend systems of big companies: banks, e-commerce, telecom. Java with Spring Boot is the most common choice for large, reliable business software.',
+  ana:'<b>Like building the engine room</b> of a ship: users never see it, but everything depends on it.',
+  learn:['Core Java & OOP','Collections, exceptions, streams','Spring Boot, Spring MVC','Spring Data JPA & Hibernate','SQL (MySQL / PostgreSQL)','REST APIs, Spring Security','Microservices, Maven, Docker'],
+  build:['Banking API','Inventory system','Microservices for an online store'],
+  jobs:[['Java Developer','most common fresher role'],['Backend Developer','Spring Boot'],['Software Engineer','service companies'],['Microservices Developer','']],
+  fit:'You like structure, strong typing and solid logic, and want to work in large enterprise teams.',
+  lang:'Java',tools:'Spring Boot, JPA, MySQL, Maven',likes:'Clean, large, reliable systems'},
+ {k:'Data Science & ML',short:'Data Science',ic:'Σ',c:'--p3',
+  what:'Turn data into answers and predictions: which customers will leave, what sales will be next month, which image shows a disease. You clean data, draw charts, and train models.',
+  ana:'<b>Like a detective with numbers:</b> look at clues (data), find the pattern, and predict what happens next.',
+  learn:['Python, NumPy, Pandas','Statistics & probability','Data visualisation','Machine learning (scikit-learn)','Deep learning (TensorFlow / PyTorch)','SQL for data','Deploying models (FastAPI, Streamlit)'],
+  build:['Churn prediction','Sales forecast','Image classifier','A/B test analysis'],
+  jobs:[['Data Analyst','good first step'],['Data Scientist',''],['Machine Learning Engineer',''],['Business Analyst','']],
+  fit:'You enjoy maths and statistics and like asking "why" of numbers.',
+  lang:'Python',tools:'Pandas, scikit-learn, TensorFlow, SQL',likes:'Patterns, maths and charts'},
+ {k:'AI & GenAI Engineering',short:'AI / GenAI',ic:'AI',c:'--p4',
+  what:'Build products on top of large language models and other AI: chatbots, assistants, document search, AI agents. It mixes software engineering with modern AI tools.',
+  ana:'<b>Like being a conductor:</b> you do not play every instrument, you make the AI tools work together in one product.',
+  learn:['Python & APIs','How LLMs work (basics)','Prompting & RAG (search + AI)','Vector databases','LangChain / LlamaIndex','Evaluating & monitoring AI','Deploying AI apps'],
+  build:['Customer support chatbot','Ask-your-PDF app','AI agent that books tasks'],
+  jobs:[['AI Engineer',''],['GenAI Developer',''],['ML Engineer','applied'],['Prompt / AI Product Engineer','']],
+  fit:'You are curious about new technology and like combining tools to build something useful fast.',
+  lang:'Python',tools:'LLM APIs, LangChain, vector DBs',likes:'New tech, fast experiments'},
+ {k:'Mobile App Development',short:'Mobile Apps',ic:'📱',c:'--p5',
+  what:'Build apps for Android and iPhone. You can use Flutter or React Native to write once and run on both, or go native with Kotlin (Android) or Swift (iOS).',
+  ana:'<b>Like designing a pocket tool:</b> small screen, touch, camera and GPS, and it must feel smooth.',
+  learn:['Dart + Flutter, or React Native','Kotlin for Android (optional)','UI design for phones','Working with APIs & local storage','Push notifications, maps, camera','Publishing to Play Store'],
+  build:['Expense tracker','Food delivery app','Fitness app with maps'],
+  jobs:[['Flutter Developer',''],['Android Developer','Kotlin'],['React Native Developer',''],['Mobile App Developer','']],
+  fit:'You love apps on your phone and care about how things look and feel.',
+  lang:'Dart / Kotlin / JavaScript',tools:'Flutter, React Native, Android Studio',likes:'Design, touch and feel'},
+ {k:'Cloud & DevOps',short:'Cloud / DevOps',ic:'☁',c:'--p6',
+  what:'Run software reliably on the internet. You set up servers in the cloud (AWS, Azure, Google Cloud), automate testing and releases, and keep apps fast and up 24/7.',
+  ana:'<b>Like running the power and water for a city:</b> when you do it well, nobody notices, and everything works.',
+  learn:['Linux & shell scripting','Networking basics','Git & CI/CD (GitHub Actions, Jenkins)','Docker & Kubernetes','One cloud: AWS / Azure / GCP','Monitoring & logging','Infrastructure as code (Terraform)'],
+  build:['Auto-deploy pipeline','Containerised app on Kubernetes','Cloud setup with monitoring'],
+  jobs:[['DevOps Engineer',''],['Cloud Engineer',''],['Site Reliability Engineer','SRE'],['Cloud Support Associate','fresher entry']],
+  fit:'You like systems, automation and making things run smoothly, more than building screens.',
+  lang:'Bash, Python, YAML',tools:'Docker, Kubernetes, AWS, Terraform',likes:'Automation and systems'},
+ {k:'Cybersecurity',short:'Cybersecurity',ic:'🔒',c:'--p7',
+  what:'Protect systems and data from attackers. You find weaknesses before hackers do, watch for attacks, and help teams build safely.',
+  ana:'<b>Like a security guard and a locksmith</b> in one: test the locks, watch the cameras, fix what is weak.',
+  learn:['Networking & OS deep dive','Linux, scripting (Python, Bash)','Web security (OWASP Top 10)','Ethical hacking tools (Burp, Nmap, Wireshark)','Security monitoring (SIEM)','Cloud security basics','Certifications like CEH, Security+ (optional)'],
+  build:['Vulnerability report on a test app','Home lab with attack & defence','Secure login system'],
+  jobs:[['SOC Analyst','common fresher role'],['Security Analyst',''],['Penetration Tester','ethical hacker'],['Application Security Engineer','']],
+  fit:'You are curious about how things break, patient with details, and like puzzles.',
+  lang:'Python, Bash',tools:'Burp Suite, Nmap, Wireshark, SIEM',likes:'Puzzles and finding weaknesses'},
+ {k:'Testing & QA Automation',short:'QA Automation',ic:'✓',c:'--p8',
+  what:'Make sure software works before users see it. Modern QA is coding: you write automated tests that check websites, apps and APIs every time code changes.',
+  ana:'<b>Like a car safety inspector:</b> you test every part so the final product is safe to ship.',
+  learn:['Testing basics: manual, test cases','Java or Python','Selenium / Playwright / Cypress','API testing (Postman, REST Assured)','Test frameworks (TestNG, JUnit, pytest)','CI integration','Performance testing (JMeter)'],
+  build:['Automated test suite for a website','API test collection','Test reports in CI'],
+  jobs:[['QA Engineer',''],['Automation Test Engineer',''],['SDET','Software Dev Engineer in Test'],['Performance Tester','']],
+  fit:'You notice small mistakes others miss and like making things dependable.',
+  lang:'Java / Python / JavaScript',tools:'Selenium, Playwright, Postman, JMeter',likes:'Precision and dependability'},
+ {k:'Python Backend & Data Engineering',short:'Python / Data Eng',ic:'Py',c:'--p9',
+  what:'Build web backends with Python (Django, FastAPI) or build the data pipelines that move and clean huge amounts of data for analytics and AI teams.',
+  ana:'<b>Like building the pipelines and plumbing</b> of a building: data and requests flow where they are needed.',
+  learn:['Python deeply','Django / FastAPI','SQL & PostgreSQL','ETL pipelines, Airflow','Big data basics (Spark)','Cloud data warehouses','APIs & authentication'],
+  build:['Django web app with admin','FastAPI service','Daily data pipeline with dashboards'],
+  jobs:[['Python Developer',''],['Backend Developer','Django / FastAPI'],['Data Engineer',''],['ETL Developer','']],
+  fit:'You like Python, clean logic and working with lots of data behind the scenes.',
+  lang:'Python',tools:'Django, FastAPI, PostgreSQL, Airflow, Spark',likes:'Data flow and backend logic'}
+];
+
+/* ---------- tree ---------- */
+(function(){const svg=$('tree');const W=640,rootX=320,rootY=330,topY=120;let h='';
+  h+=`<rect class="tr-base" x="80" y="366" width="480" height="26" rx="8"/><text class="tr-bt" x="320" y="384" text-anchor="middle">DSA · SQL · GIT · ONE LANGUAGE · COMMUNICATION</text>`;
+  P.forEach((p,i)=>{const x=46+i*(W-92)/8;const c=`var(${p.c})`;
+    h+=`<path class="tr-line" style="--i:${i};stroke:${c}" d="M${rootX} ${rootY-18} C ${rootX} ${210}, ${x} ${250}, ${x} ${topY+34}"/>`;});
+  h+=`<g class="tr-node" style="--i:-1"><rect class="tr-root" x="${rootX-78}" y="${rootY-40}" width="156" height="44" rx="12"/><text class="tr-rt" x="${rootX}" y="${rootY-12}" text-anchor="middle">MCA · Year 1</text></g>`;
+  P.forEach((p,i)=>{const x=46+i*(W-92)/8;const c=`var(${p.c})`;const words=[['MERN'],['Spring','Boot'],['Data','Science'],['AI /','GenAI'],['Mobile'],['Cloud /','DevOps'],['Security'],['QA'],['Python']][i];
+    h+=`<g class="tr-node" style="--i:${i}"><circle cx="${x}" cy="${topY+14}" r="20" fill="${c}"/><text x="${x}" y="${topY+19}" text-anchor="middle" style="font-family:var(--mono);font-size:11px;font-weight:600;fill:var(--bg)">${p.ic}</text>`;
+    const ty=(i%2?topY-40:topY-20);
+    words.forEach((w,k)=>{h+=`<text class="tr-lbl" x="${x}" y="${ty+k*14 - (words.length-1)*7}" text-anchor="middle">${esc(w)}</text>`;});
+    h+=`</g>`;});
+  svg.innerHTML=h;})();
+
+/* ---------- path tabs ---------- */
+const pt=$('ptabs');
+pt.innerHTML=P.map((p,i)=>`<button class="ptab" type="button" role="tab" id="pt${i}" style="--c:var(${p.c})"><span class="ic">${p.ic}</span><b>${esc(p.short)}</b></button>`).join('');
+pt.querySelectorAll('button').forEach((b,i)=>{b.addEventListener('click',()=>psel(i));b.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const j=(i+(e.key==='ArrowRight'?1:P.length-1))%P.length;psel(j);pt.children[j].focus();}});});
+function psel(i){const p=P[i];
+  pt.querySelectorAll('button').forEach((b,j)=>{b.setAttribute('aria-selected',j===i);b.tabIndex=j===i?0:-1;});
+  $('ppanel').setAttribute('aria-labelledby','pt'+i);
+  $('ppanel').innerHTML=`<div class="ppanel" style="--c:var(${p.c})">
+   <div><div><span class="eyebrow">Path ${i+1} of ${P.length}</span><h3 style="font-size:30px;margin-top:6px">${esc(p.k)}</h3></div>
+    <p class="what">${esc(p.what)}</p><p class="ana">${p.ana}</p>
+    <div><h4>What you learn, in order</h4><ol class="steps">${p.learn.map(l=>`<li>${esc(l)}</li>`).join('')}</ol></div>
+    <div><h4>Things you will build</h4><div class="build">${p.build.map(b=>`<span>${esc(b)}</span>`).join('')}</div></div></div>
+   <div><div><h4>Job titles to search for</h4><div class="jobs">${p.jobs.map(j=>`<div class="job">${esc(j[0])}<span>${esc(j[1])}</span></div>`).join('')}</div></div>
+    <div class="fit"><b>Good for you if</b>${esc(p.fit)}</div>
+    <div><h4>Main language</h4><div class="chips"><span class="chip">${esc(p.lang)}</span></div></div></div>
+  </div>`;
+  try{localStorage.setItem('mca-path',i)}catch(e){}}
+let sp=0;try{const v=+localStorage.getItem('mca-path');if(v>=0&&v<P.length)sp=v}catch(e){}
+psel(sp);
+
+/* ---------- compare table ---------- */
+$('cmp').innerHTML=`<thead><tr><th>Path</th><th>Main language</th><th>Main tools</th><th>You build</th><th>First job titles</th><th>Good if you like</th></tr></thead><tbody>${P.map(p=>`<tr><td style="--c:var(${p.c})"><i></i>${esc(p.k)}</td><td>${esc(p.lang)}</td><td>${esc(p.tools)}</td><td>${esc(p.build.slice(0,2).join(', '))}</td><td>${esc(p.jobs.slice(0,2).map(j=>j[0]).join(', '))}</td><td>${esc(p.likes)}</td></tr>`).join('')}</tbody>`;
+
+/* ---------- quiz ---------- */
+const Q=[
+ {q:'What do you enjoy most?',o:[['Making things people can see and click',{0:3,4:3,3:1}],['Logic and clean structure',{1:3,8:2,5:1}],['Numbers, patterns and maths',{2:3,8:2,3:1}],['Figuring out how things break or run',{6:3,5:3,7:2}]]},
+ {q:'Which sounds most fun for a weekend?',o:[['Build a small website or app',{0:3,4:2}],['Solve tricky coding puzzles',{1:2,7:2,6:1}],['Explore a dataset and draw charts',{2:3,8:1}],['Try a new AI tool and build something with it',{3:3,0:1}],['Set up a server or automate a task',{5:3,8:1}]]},
+ {q:'How do you feel about maths and statistics?',o:[['I love it',{2:3,3:1}],['It is okay',{1:1,0:1,8:1}],['I would rather avoid it',{0:2,4:2,7:2,5:1}]]},
+ {q:'What kind of work place do you imagine?',o:[['Startup, fast and changing',{0:2,3:2,4:1}],['Large company, stable and structured',{1:3,7:2,5:1}],['Research or analytics team',{2:3,8:2}],['Security or operations team',{6:3,5:2}]]},
+ {q:'Which of these would you be proud to show?',o:[['A live app with a link',{0:3,4:2,8:1}],['A system handling thousands of users',{1:3,5:2}],['A model that predicts something correctly',{2:3,3:2}],['A report of security holes you found',{6:3,7:1}]]}
+];
+const ans={};
+$('qcard').innerHTML=Q.map((q,i)=>`<div class="q"><b>${i+1}. ${esc(q.q)}</b><div class="opts" data-q="${i}">${q.o.map((o,k)=>`<button type="button" data-k="${k}">${esc(o[0])}</button>`).join('')}</div></div>`).join('');
+$('qcard').querySelectorAll('.opts').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const qi=+g.dataset.q;ans[qi]=+b.dataset.k;g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));score();}));
+function score(){const s=P.map(()=>0);let n=0;Object.entries(ans).forEach(([qi,k])=>{n++;Object.entries(Q[qi].o[k][1]).forEach(([p,v])=>s[p]+=v);});
+  const max=Math.max(1,...s);const order=s.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);
+  const top=order.slice(0,3).filter(x=>x[0]>0);
+  $('result').innerHTML=`<span class="eyebrow">${n?`Based on ${n} answer${n>1?'s':''}`:'Your result'}</span>
+   <h3 style="font-size:24px">${n?`Try <span style="color:var(${P[top[0][1]].c})">${esc(P[top[0][1]].k)}</span> first`:'Answer the questions to see your fit'}</h3>
+   ${n?`<p class="rtop">${esc(P[top[0][1]].fit)}${top[1]?` Also worth a look: <b>${esc(P[top[1][1]].k)}</b>${top[2]?` and <b>${esc(P[top[2][1]].k)}</b>`:''}.`:''}</p>`:'<p class="rtop">Each answer adds points to the paths it matches. The bars update as you go.</p>'}
+   <div style="display:grid;gap:8px">${order.map(([v,i])=>`<div class="rbar" style="--c:var(${P[i].c})"><span>${esc(P[i].short)}</span><span class="track"><i style="width:${v/max*100}%"></i></span><em>${v}</em></div>`).join('')}</div>
+   ${n?`<a href="#paths" class="btn ghost" style="justify-self:start;text-decoration:none" data-go="${top[0][1]}">See this path ↑</a>`:''}`;
+  const go=$('result').querySelector('[data-go]');if(go)go.addEventListener('click',()=>psel(+go.dataset.go));}
+score();
+
+/* ---------- checklist ---------- */
+const C=[['GitHub profile with 3+ projects','Each with a README and screenshots.'],['One deployed project with a live link','Anything people can open in a browser.'],['A one-page resume','Clear, simple, no spelling mistakes.'],['LinkedIn profile','Photo, headline, projects and skills filled in.'],['Coding practice profile','150+ DSA problems solved over time.'],['One internship or freelance work','Even a small one counts.'],['Core subjects revised','DBMS, OS, networks, OOP.'],['Can explain your best project in 2 minutes','Practise out loud.']];
+let done={};try{done=JSON.parse(localStorage.getItem('mca-done')||'{}')}catch(e){}
+$('check').innerHTML=C.map((c,i)=>`<label for="c${i}"><input type="checkbox" id="c${i}" ${done[i]?'checked':''}><span><span class="dt">${esc(c[0])}</span><span class="dd">${esc(c[1])}</span></span></label>`).join('');
+function prog(){const n=C.filter((_,i)=>$('c'+i).checked).length;$('pbar').style.width=n/C.length*100+'%';$('ptext').textContent=`${n} of ${C.length} done`;}
+C.forEach((_,i)=>$('c'+i).addEventListener('change',e=>{done[i]=e.target.checked;try{localStorage.setItem('mca-done',JSON.stringify(done))}catch(err){}prog();}));
+prog();
+})();
+</script>
+
+</body>
+</html>
